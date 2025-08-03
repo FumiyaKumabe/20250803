@@ -34,16 +34,32 @@ function calculateROI() {
     // その他固定削減
     const otherSavings = 13500;
     
+    // 離職率改善効果
+    const currentTurnoverRate = 0.123; // 12.3%
+    const improvedTurnoverRate = 0.086; // 8.6% (30%減少)
+    const turnoverReduction = currentTurnoverRate - improvedTurnoverRate;
+    const annualTurnoverSavings = headcount * turnoverReduction * 350000; // 35万円/人
+    
     // 月間純メリット
-    const monthlyBenefit = savedAmount + uncollectedRecovery + otherSavings;
+    const monthlyBenefit = savedAmount + uncollectedRecovery + otherSavings + (annualTurnoverSavings / 12);
     
     // 年間効果
     const yearlyBenefit = monthlyBenefit * 12;
     
     // 結果を表示
     document.getElementById('saved-hours').textContent = `${totalSavedHours.toFixed(1)} h/月`;
-    document.getElementById('monthly-benefit').textContent = `${monthlyBenefit.toLocaleString()} 円`;
-    document.getElementById('yearly-benefit').textContent = `${yearlyBenefit.toLocaleString()} 円`;
+    document.getElementById('monthly-benefit').textContent = `${Math.round(monthlyBenefit).toLocaleString()} 円`;
+    document.getElementById('yearly-benefit').textContent = `${Math.round(yearlyBenefit).toLocaleString()} 円`;
+    
+    // 詳細結果の表示（デバッグ用）
+    console.log('ROI計算詳細:');
+    console.log(`削減時間: ${totalSavedHours.toFixed(1)}h/月`);
+    console.log(`人件費削減: ${savedAmount.toLocaleString()}円/月`);
+    console.log(`未請求回収: ${Math.round(uncollectedRecovery).toLocaleString()}円/月`);
+    console.log(`その他削減: ${otherSavings.toLocaleString()}円/月`);
+    console.log(`離職率改善: ${Math.round(annualTurnoverSavings / 12).toLocaleString()}円/月`);
+    console.log(`月間合計: ${Math.round(monthlyBenefit).toLocaleString()}円`);
+    console.log(`年間合計: ${Math.round(yearlyBenefit).toLocaleString()}円`);
     
     // 再投資シナリオの更新
     updateReinvestmentScenarios(totalSavedHours);

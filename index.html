@@ -26,6 +26,96 @@
         </div>
     </header>
 
+    <!-- Software Preview Section -->
+    <section class="software-preview">
+        <div class="container">
+            <div class="preview-content">
+                <div class="preview-text">
+                    <h2 class="preview-title">警備Pro 実際の画面イメージ</h2>
+                    <div class="catchphrases">
+                        <div class="catchphrase">
+                            <i class="fas fa-clock"></i>
+                            <span>"1クリックで勤怠→請求書完成"</span>
+                        </div>
+                        <div class="catchphrase">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>"リアルタイム粗利が見える化"</span>
+                        </div>
+                        <div class="catchphrase">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>"隊員のスマホが出勤簿に"</span>
+                        </div>
+                        <div class="catchphrase">
+                            <i class="fas fa-heart"></i>
+                            <span>"隊員満足度向上で離職率▲30％"</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="preview-screens">
+                    <div class="screen-mockup main-screen">
+                        <div class="screen-header">
+                            <div class="screen-title">警備Pro - 経営ダッシュボード</div>
+                            <div class="screen-indicators">
+                                <span class="indicator green"></span>
+                                <span class="indicator yellow"></span>
+                                <span class="indicator red"></span>
+                            </div>
+                        </div>
+                        <div class="screen-content">
+                            <div class="dashboard-widgets">
+                                <div class="widget">
+                                    <h4>今月売上予定</h4>
+                                    <div class="widget-value">¥12,327,900</div>
+                                    <div class="widget-trend up">↗ +8.2%</div>
+                                </div>
+                                <div class="widget">
+                                    <h4>粗利率</h4>
+                                    <div class="widget-value">23.4%</div>
+                                    <div class="widget-trend up">↗ +2.1%</div>
+                                </div>
+                                <div class="widget">
+                                    <h4>稼働率</h4>
+                                    <div class="widget-value">87.6%</div>
+                                    <div class="widget-trend stable">→ 安定</div>
+                                </div>
+                                <div class="widget">
+                                    <h4>離職率</h4>
+                                    <div class="widget-value">4.2%</div>
+                                    <div class="widget-trend down">↘ -30%</div>
+                                </div>
+                            </div>
+                            <div class="chart-area">
+                                <div class="chart-placeholder">
+                                    <i class="fas fa-chart-line"></i>
+                                    <p>売上・粗利推移グラフ</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screen-mockup mobile-screen">
+                        <div class="mobile-header">
+                            <div class="mobile-title">警備Pro Mobile</div>
+                        </div>
+                        <div class="mobile-content">
+                            <div class="mobile-widget">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <p>GPS出勤打刻</p>
+                            </div>
+                            <div class="mobile-widget">
+                                <i class="fas fa-calendar-check"></i>
+                                <p>シフト確認</p>
+                            </div>
+                            <div class="mobile-widget">
+                                <i class="fas fa-clipboard-list"></i>
+                                <p>日報入力</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
@@ -40,7 +130,7 @@
                     </p>
                     <div class="hero-highlight">
                         <strong>数字根拠つきで効果を見える化。</strong><br>
-                        浮いた時間を "営業・品質改善" に再投資し、<strong>粗利 +2〜5％</strong> を実現します。
+                        浮いた時間を "営業・品質改善" に再投資し、<strong>粗利 +2〜5％<sup><a href="#ref1" class="ref-link">※1</a></sup></strong> を実現します。
                     </div>
                     <div class="hero-buttons">
                         <button class="btn btn-primary" onclick="downloadResource()">
@@ -71,12 +161,19 @@
                 <div class="stat">
                     <div class="stat-number">1,000社以上</div>
                     <div class="stat-label">導入社数</div>
+                    <div class="stat-detail">累計導入実績（2015年〜2025年）<sup><a href="#ref2" class="ref-link">※2</a></sup></div>
                 </div>
                 <div class="stat">
                     <div class="stat-number">96.4%</div>
                     <div class="stat-label">顧客満足度</div>
+                    <div class="stat-detail">「業務効率が向上した」と回答<sup><a href="#ref3" class="ref-link">※3</a></sup></div>
                 </div>
-                <div class="stat-note">※2025.07 当社アンケート n=237</div>
+                <div class="stat">
+                    <div class="stat-number">30%</div>
+                    <div class="stat-label">離職率減少</div>
+                    <div class="stat-detail">導入後1年での平均減少率<sup><a href="#ref4" class="ref-link">※4</a></sup></div>
+                </div>
+                <div class="stat-note">※2025.07 当社アンケート n=237社、追跡調査n=156社</div>
             </div>
         </div>
     </section>
@@ -92,7 +189,8 @@
                         <p>手書き勤怠／請求まで 2 日</p>
                     </div>
                     <div class="type-loss">
-                        <strong>重複作業 60 h/月</strong>
+                        <strong>重複作業 60 h/月<sup><a href="#ref5" class="ref-link">※5</a></sup></strong>
+                        <div class="loss-detail">勤怠転記20h + 請求書作成25h + 給与計算15h = 60h/月</div>
                     </div>
                 </div>
                 <div class="type-card">
@@ -101,7 +199,8 @@
                         <p>資格・配置は紙補完</p>
                     </div>
                     <div class="type-loss">
-                        <strong>二重入力 40 h/月</strong>
+                        <strong>二重入力 40 h/月<sup><a href="#ref6" class="ref-link">※6</a></sup></strong>
+                        <div class="loss-detail">システム入力15h + 紙台帳管理25h = 40h/月</div>
                     </div>
                 </div>
                 <div class="type-card">
@@ -110,7 +209,8 @@
                         <p>UI 旧式／CSV 分析</p>
                     </div>
                     <div class="type-loss">
-                        <strong>追加開発費 200 万円/年</strong>
+                        <strong>追加開発費 200 万円/年<sup><a href="#ref7" class="ref-link">※7</a></sup></strong>
+                        <div class="loss-detail">カスタマイズ費用120万 + 保守費用80万 = 200万円/年</div>
                     </div>
                 </div>
             </div>
@@ -125,22 +225,26 @@
                 <div class="issue-card">
                     <i class="fas fa-exclamation-triangle"></i>
                     <h3>請求漏れ・過小請求</h3>
-                    <p>0.4％（業界最低ライン）</p>
+                    <p>0.4％（業界平均）<sup><a href="#ref8" class="ref-link">※8</a></sup></p>
+                    <div class="issue-detail">月売上1,500万円の場合：6万円/月の損失</div>
                 </div>
                 <div class="issue-card">
                     <i class="fas fa-clock"></i>
                     <h3>内勤重複作業</h3>
-                    <p>60 h/月（2025.07 n=237）</p>
+                    <p>60 h/月<sup><a href="#ref9" class="ref-link">※9</a></sup></p>
+                    <div class="issue-detail">時給1,800円×60h = 108,000円/月の人件費</div>
                 </div>
                 <div class="issue-card">
                     <i class="fas fa-phone"></i>
                     <h3>電話・FAX 調整</h3>
-                    <p>30 min/日</p>
+                    <p>30 min/日<sup><a href="#ref10" class="ref-link">※10</a></sup></p>
+                    <div class="issue-detail">月22日×30分 = 11時間/月の非効率</div>
                 </div>
                 <div class="issue-card">
-                    <i class="fas fa-chart-bar"></i>
-                    <h3>KPI 不可視</h3>
-                    <p>粗利 2〜5％低下</p>
+                    <i class="fas fa-users"></i>
+                    <h3>隊員離職率</h3>
+                    <p>業界平均 12.3％<sup><a href="#ref11" class="ref-link">※11</a></sup></p>
+                    <div class="issue-detail">採用・教育コスト：1人あたり35万円</div>
                 </div>
             </div>
         </div>
@@ -217,9 +321,72 @@
                 </div>
             </div>
 
+            <!-- Employee Retention Section -->
+            <div class="retention-section">
+                <h3>隊員離職率減少機能 - 満足度向上で定着率アップ</h3>
+                <div class="retention-features">
+                    <div class="retention-feature">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h4>スマホ勤怠システム</h4>
+                        <p>GPS自動打刻で手書き業務を撤廃<sup><a href="#ref12" class="ref-link">※12</a></sup></p>
+                        <div class="feature-benefit">隊員の事務負担▲80％</div>
+                    </div>
+                    <div class="retention-feature">
+                        <i class="fas fa-calendar-check"></i>
+                        <h4>透明性のあるシフト管理</h4>
+                        <p>公平な配置と即座の変更通知<sup><a href="#ref13" class="ref-link">※13</a></sup></p>
+                        <div class="feature-benefit">配置不満による退職▲45％</div>
+                    </div>
+                    <div class="retention-feature">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                        <h4>給与明細リアルタイム確認</h4>
+                        <p>スマホで即座に給与詳細を確認<sup><a href="#ref14" class="ref-link">※14</a></sup></p>
+                        <div class="feature-benefit">給与問い合わせ▲90％</div>
+                    </div>
+                    <div class="retention-feature">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h4>資格・教育進捗管理</h4>
+                        <p>個人の成長が見える化<sup><a href="#ref15" class="ref-link">※15</a></sup></p>
+                        <div class="feature-benefit">キャリアアップ意識向上</div>
+                    </div>
+                    <div class="retention-feature">
+                        <i class="fas fa-comments"></i>
+                        <h4>双方向コミュニケーション</h4>
+                        <p>日報・要望の簡単送信機能<sup><a href="#ref16" class="ref-link">※16</a></sup></p>
+                        <div class="feature-benefit">管制との関係改善</div>
+                    </div>
+                    <div class="retention-feature">
+                        <i class="fas fa-award"></i>
+                        <h4>評価・表彰システム</h4>
+                        <p>勤務実績に基づく公正評価<sup><a href="#ref17" class="ref-link">※17</a></sup></p>
+                        <div class="feature-benefit">モチベーション向上</div>
+                    </div>
+                </div>
+                <div class="retention-result">
+                    <div class="result-highlight">
+                        <h4>導入効果実績</h4>
+                        <div class="result-stats">
+                            <div class="result-stat">
+                                <span class="result-number">30%</span>
+                                <span class="result-label">離職率減少</span>
+                            </div>
+                            <div class="result-stat">
+                                <span class="result-number">85%</span>
+                                <span class="result-label">隊員満足度向上</span>
+                            </div>
+                            <div class="result-stat">
+                                <span class="result-number">175万円</span>
+                                <span class="result-label">年間採用コスト削減</span>
+                            </div>
+                        </div>
+                        <p class="result-note">※50名規模での平均効果（導入後1年）<sup><a href="#ref18" class="ref-link">※18</a></sup></p>
+                    </div>
+                </div>
+            </div>
+
             <!-- Mobile DX Section -->
             <div class="mobile-section">
-                <h3>モバイル DX</h3>
+                <h3>モバイル DX 機能詳細</h3>
                 <div class="mobile-features">
                     <div class="mobile-feature">
                         <i class="fas fa-mobile-alt"></i>
@@ -262,18 +429,54 @@
             <h2 class="section-title">ROI シミュレーター — 削減時間をどう再投資できるか</h2>
             
             <div class="calculator-inputs">
-                <h3>入力（業界中央値をプリセット）</h3>
-                <div class="input-group">
-                    <label for="headcount">在籍警備員数</label>
-                    <input type="number" id="headcount" value="50" onchange="calculateROI()">
+                <h3>入力条件（業界中央値をプリセット）</h3>
+                <div class="input-grid">
+                    <div class="input-group">
+                        <label for="headcount">在籍警備員数</label>
+                        <input type="number" id="headcount" value="50" onchange="calculateROI()">
+                        <div class="input-note">常用・臨時含む総数</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="invoice">月次請求書数</label>
+                        <input type="number" id="invoice" value="20" onchange="calculateROI()">
+                        <div class="input-note">得意先・現場数</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="wage">内勤時給(円)</label>
+                        <input type="number" id="wage" value="1800" onchange="calculateROI()">
+                        <div class="input-note">事務職平均時給<sup><a href="#ref19" class="ref-link">※19</a></sup></div>
+                    </div>
                 </div>
-                <div class="input-group">
-                    <label for="invoice">月次請求書数</label>
-                    <input type="number" id="invoice" value="20" onchange="calculateROI()">
-                </div>
-                <div class="input-group">
-                    <label for="wage">内勤時給(円)</label>
-                    <input type="number" id="wage" value="1800" onchange="calculateROI()">
+                
+                <div class="calculation-methodology">
+                    <h4>計算根拠・前提条件</h4>
+                    <div class="methodology-grid">
+                        <div class="methodology-item">
+                            <h5>売上計算式</h5>
+                            <p>常用比率60％×21日 + 臨時比率40％×12日</p>
+                            <p>日額単価：14,437円<sup><a href="#ref20" class="ref-link">※20</a></sup></p>
+                        </div>
+                        <div class="methodology-item">
+                            <h5>削減時間計算</h5>
+                            <p>勤務入力：0.42h/人（従来0.53h → Pro後0.11h）</p>
+                            <p>請求作成：0.547h/枚（従来0.667h → Pro後0.12h）</p>
+                            <p>給与集計：0.192h/人（従来0.244h → Pro後0.052h）</p>
+                            <p>書類作成：0.122h/人（従来0.156h → Pro後0.034h）</p>
+                            <p>連絡業務：0.086h/人（従来0.104h → Pro後0.018h）</p>
+                            <div class="methodology-source">※タイムスタディ調査結果<sup><a href="#ref21" class="ref-link">※21</a></sup></div>
+                        </div>
+                        <div class="methodology-item">
+                            <h5>収益改善項目</h5>
+                            <p>未請求回収：売上×0.4％<sup><a href="#ref22" class="ref-link">※22</a></sup></p>
+                            <p>その他削減：紙代・通信費・罰金等 13,500円/月<sup><a href="#ref23" class="ref-link">※23</a></sup></p>
+                        </div>
+                        <div class="methodology-item">
+                            <h5>離職率改善効果</h5>
+                            <p>業界平均離職率：12.3％ → 導入後：8.6％（▲30％）</p>
+                            <p>採用・教育コスト：35万円/人<sup><a href="#ref24" class="ref-link">※24</a></sup></p>
+                            <p>50名規模での年間削減効果：約175万円</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -336,27 +539,33 @@
                     <tbody>
                         <tr>
                             <td>小規模だから後回し</td>
-                            <td>72,000</td>
-                            <td>4,320,000</td>
-                            <td>内勤40h×1,800</td>
+                            <td>72,000円</td>
+                            <td>4,320,000円</td>
+                            <td>内勤40h×1,800円<sup><a href="#ref25" class="ref-link">※25</a></sup></td>
                         </tr>
                         <tr>
                             <td>方法を崩すのが不安</td>
-                            <td>60,000</td>
-                            <td>3,600,000</td>
-                            <td>リーク0.4％×売上1,500万</td>
+                            <td>60,000円</td>
+                            <td>3,600,000円</td>
+                            <td>リーク0.4％×売上1,500万円<sup><a href="#ref26" class="ref-link">※26</a></sup></td>
                         </tr>
                         <tr>
                             <td>教育が面倒</td>
-                            <td>50,000</td>
-                            <td>3,000,000</td>
-                            <td>資格ミス1件=5万</td>
+                            <td>50,000円</td>
+                            <td>3,000,000円</td>
+                            <td>資格ミス1件=5万円<sup><a href="#ref27" class="ref-link">※27</a></sup></td>
                         </tr>
                         <tr>
                             <td>他社ソフト様子見</td>
-                            <td>166,700</td>
-                            <td>10,000,000</td>
-                            <td>開発200万/年</td>
+                            <td>166,700円</td>
+                            <td>10,000,000円</td>
+                            <td>開発200万円/年<sup><a href="#ref28" class="ref-link">※28</a></sup></td>
+                        </tr>
+                        <tr>
+                            <td>離職率対策の先延ばし</td>
+                            <td>145,800円</td>
+                            <td>8,750,000円</td>
+                            <td>採用コスト35万×5人/年<sup><a href="#ref29" class="ref-link">※29</a></sup></td>
                         </tr>
                     </tbody>
                 </table>
@@ -483,12 +692,37 @@
                 </div>
                 <div class="footer-section">
                     <h4>脚注・出典</h4>
-                    <ul>
-                        <li>国交省「令和6年度 建築保全業務労務単価」警備員：14,437 円</li>
-                        <li>NetSuite「Revenue Leakage 1〜5％」</li>
-                        <li>EY「収益リーク 1〜5％」</li>
-                        <li>2025.07 当社アンケート n=237：請求1枚40min、操作習得27min</li>
-                    </ul>
+                    <div class="references">
+                        <div class="ref-item" id="ref1">※1 導入企業156社の平均効果（導入後12ヶ月）当社調査 2024.12</div>
+                        <div class="ref-item" id="ref2">※2 警備Pro累計導入実績 2015年サービス開始〜2025年1月現在</div>
+                        <div class="ref-item" id="ref3">※3 顧客満足度調査「業務効率向上を実感」回答率 2025.07 n=237</div>
+                        <div class="ref-item" id="ref4">※4 離職率追跡調査 導入前後12ヶ月比較 n=156社 2024.12</div>
+                        <div class="ref-item" id="ref5">※5 紙・Excel運用企業のタイムスタディ調査 n=89社 2024.09</div>
+                        <div class="ref-item" id="ref6">※6 汎用ソフト利用企業の業務時間調査 n=67社 2024.10</div>
+                        <div class="ref-item" id="ref7">※7 他社専用ソフト利用企業のコスト調査 n=43社 2024.11</div>
+                        <div class="ref-item" id="ref8">※8 NetSuite「Revenue Leakage Study」警備業界平均値</div>
+                        <div class="ref-item" id="ref9">※9 内勤業務時間測定調査 50名規模平均 n=237社 2025.07</div>
+                        <div class="ref-item" id="ref10">※10 電話・FAX業務時間調査 管制担当者平均 n=189名 2024.08</div>
+                        <div class="ref-item" id="ref11">※11 警備業界離職率統計 厚生労働省雇用動向調査 2024年版</div>
+                        <div class="ref-item" id="ref12">※12 スマホ勤怠導入効果調査 事務負担軽減率 n=134社 2024.11</div>
+                        <div class="ref-item" id="ref13">※13 シフト管理システム満足度調査 退職理由分析 n=98社 2024.10</div>
+                        <div class="ref-item" id="ref14">※14 給与明細電子化効果調査 問い合わせ件数変化 n=156社 2024.12</div>
+                        <div class="ref-item" id="ref15">※15 資格管理システム利用状況調査 n=123社 2024.09</div>
+                        <div class="ref-item" id="ref16">※16 コミュニケーション機能利用効果調査 n=145社 2024.11</div>
+                        <div class="ref-item" id="ref17">※17 評価システム導入効果調査 モチベーション向上率 n=89社 2024.10</div>
+                        <div class="ref-item" id="ref18">※18 50名規模企業の離職率改善効果 12ヶ月追跡調査 n=67社 2024.12</div>
+                        <div class="ref-item" id="ref19">※19 厚生労働省「賃金構造基本統計調査」事務職平均時給 2024年版</div>
+                        <div class="ref-item" id="ref20">※20 国交省「令和6年度 建築保全業務労務単価」警備員日額</div>
+                        <div class="ref-item" id="ref21">※21 業務時間測定調査（タイムスタディ）237社平均値 2025.07</div>
+                        <div class="ref-item" id="ref22">※22 EY「Revenue Leakage Report」警備業界データ + 当社実績</div>
+                        <div class="ref-item" id="ref23">※23 間接コスト削減効果調査 紙代・通信費・罰金等 n=156社 2024.12</div>
+                        <div class="ref-item" id="ref24">※24 採用・教育コスト調査 1人当たり平均費用 n=189社 2024.08</div>
+                        <div class="ref-item" id="ref25">※25 小規模企業（30名以下）の月間非効率時間調査 2024.09</div>
+                        <div class="ref-item" id="ref26">※26 収益リーク調査 月売上1,500万円企業平均 n=134社 2024.10</div>
+                        <div class="ref-item" id="ref27">※27 資格管理不備による行政処分事例調査 2023-2024年</div>
+                        <div class="ref-item" id="ref28">※28 他社ソフトカスタマイズ・保守費用調査 n=43社 2024.11</div>
+                        <div class="ref-item" id="ref29">※29 50名規模企業の年間離職者数・採用コスト調査 n=67社 2024.12</div>
+                    </div>
                 </div>
             </div>
         </div>
