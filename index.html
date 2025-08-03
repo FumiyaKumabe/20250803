@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>警備Pro - 経営直結型警備ソフト</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>警備Pro</h1>
+                </div>
+                <nav class="nav">
+                    <a href="#features">機能</a>
+                    <a href="#roi">ROI試算</a>
+                    <a href="#cases">事例</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h2 class="hero-title">
+                        勤怠入力 ⇒ 粗利・稼働率・キャッシュフローまで直結。<br>
+                        請求と給与は入口。利益と成長を出口に。
+                    </h2>
+                    <p class="hero-subtitle">
+                        管制で打ったデータがそのまま KPI へ変わる、警備業唯一の"経営直結型"No1警備ソフト『警備Pro。』
+                    </p>
+                    <div class="hero-highlight">
+                        <strong>数字根拠つきで効果を見える化。</strong><br>
+                        浮いた時間を "営業・品質改善" に再投資し、<strong>粗利 +2〜5％</strong> を実現します。
+                    </div>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="downloadResource()">
+                            <i class="fas fa-download"></i> 資料 3 分
+                        </button>
+                        <button class="btn btn-secondary" onclick="showDemo()">
+                            <i class="fas fa-play"></i> 2 分デモ
+                        </button>
+                        <button class="btn btn-accent" onclick="scrollToROI()">
+                            <i class="fas fa-calculator"></i> ROI を試算
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="dashboard-preview">
+                        <i class="fas fa-chart-line"></i>
+                        <p>リアルタイム経営ダッシュボード</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Bar -->
+    <section class="trust-bar">
+        <div class="container">
+            <div class="trust-stats">
+                <div class="stat">
+                    <div class="stat-number">1,000社以上</div>
+                    <div class="stat-label">導入社数</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">96.4%</div>
+                    <div class="stat-label">顧客満足度</div>
+                </div>
+                <div class="stat-note">※2025.07 当社アンケート n=237</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Type Check -->
+    <section class="type-check">
+        <div class="container">
+            <h2 class="section-title">あなたの会社は、どのタイプ？</h2>
+            <div class="type-grid">
+                <div class="type-card">
+                    <h3>A：紙・Excel</h3>
+                    <div class="type-symptoms">
+                        <p>手書き勤怠／請求まで 2 日</p>
+                    </div>
+                    <div class="type-loss">
+                        <strong>重複作業 60 h/月</strong>
+                    </div>
+                </div>
+                <div class="type-card">
+                    <h3>B：汎用ソフト</h3>
+                    <div class="type-symptoms">
+                        <p>資格・配置は紙補完</p>
+                    </div>
+                    <div class="type-loss">
+                        <strong>二重入力 40 h/月</strong>
+                    </div>
+                </div>
+                <div class="type-card">
+                    <h3>C：他社専用ソフト</h3>
+                    <div class="type-symptoms">
+                        <p>UI 旧式／CSV 分析</p>
+                    </div>
+                    <div class="type-loss">
+                        <strong>追加開発費 200 万円/年</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Issues -->
+    <section class="issues">
+        <div class="container">
+            <h2 class="section-title">現状の課題（埋もれた機会損失）</h2>
+            <div class="issues-grid">
+                <div class="issue-card">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>請求漏れ・過小請求</h3>
+                    <p>0.4％（業界最低ライン）</p>
+                </div>
+                <div class="issue-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>内勤重複作業</h3>
+                    <p>60 h/月（2025.07 n=237）</p>
+                </div>
+                <div class="issue-card">
+                    <i class="fas fa-phone"></i>
+                    <h3>電話・FAX 調整</h3>
+                    <p>30 min/日</p>
+                </div>
+                <div class="issue-card">
+                    <i class="fas fa-chart-bar"></i>
+                    <h3>KPI 不可視</h3>
+                    <p>粗利 2〜5％低下</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">警備Pro 基本機能 — 勤務入力 ➜ 請求・給与・経営管理</h2>
+            
+            <div class="feature-comparison">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>ステップ</th>
+                            <th>従来</th>
+                            <th>警備Pro なら</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>勤務入力</td>
+                            <td>手書きや Excel</td>
+                            <td><strong>コピー入力・簡易入力アシスト</strong>（前回複写／数字パッド）</td>
+                        </tr>
+                        <tr>
+                            <td>請求書作成</td>
+                            <td>手入力→押印→PDF→印刷</td>
+                            <td><strong>勤怠→請求 PDF 一括生成 & 電子応印</strong></td>
+                        </tr>
+                        <tr>
+                            <td>給与明細作成</td>
+                            <td>Excel マクロ／紙版</td>
+                            <td><strong>勤怠・控除・手当を自動集計</strong>（CSV & PDF 出力）</td>
+                        </tr>
+                        <tr>
+                            <td>経営管理</td>
+                            <td>月末 CSV 集計</td>
+                            <td><strong>売上予定・粗利見込を確認</strong>（集計後すぐ閲覧）</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="architecture-highlight">
+                <h3>ワンデータ・アーキテクチャ</h3>
+                <ul>
+                    <li>二重入力ゼロ</li>
+                    <li>集計ボタン 1 つで最新数値反映</li>
+                    <li>管制／経理／経営が同じ元データを役割別に閲覧</li>
+                </ul>
+            </div>
+
+            <!-- Legal Documents Section -->
+            <div class="legal-section">
+                <h3>法令・備え付け書類</h3>
+                <div class="legal-features">
+                    <div class="legal-feature">
+                        <i class="fas fa-file-alt"></i>
+                        <p>警備業法帳票 100 種＋資格者配置路線図をリアルタイム生成</p>
+                    </div>
+                    <div class="legal-feature">
+                        <i class="fas fa-graduation-cap"></i>
+                        <p>教育・資格更新状況を色分けダッシュボードで管理</p>
+                    </div>
+                    <div class="legal-feature">
+                        <i class="fas fa-search"></i>
+                        <p>立入検査モード：帳票を ZIP 一括出力</p>
+                    </div>
+                    <div class="legal-feature">
+                        <i class="fas fa-sync-alt"></i>
+                        <p>改正法令はリリース 30 日以内・無償対応</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile DX Section -->
+            <div class="mobile-section">
+                <h3>モバイル DX</h3>
+                <div class="mobile-features">
+                    <div class="mobile-feature">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h4>スマホ勤怠</h4>
+                        <p>GPS 打刻、即データ反映</p>
+                    </div>
+                    <div class="mobile-feature">
+                        <i class="fas fa-bell"></i>
+                        <h4>シフト通知</h4>
+                        <p>配置確定をプッシュ送信</p>
+                    </div>
+                    <div class="mobile-feature">
+                        <i class="fas fa-clipboard-list"></i>
+                        <h4>電子日報</h4>
+                        <p>写真＋音声コメント送信</p>
+                    </div>
+                    <div class="mobile-feature">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                        <h4>給与明細スマホ閲覧</h4>
+                        <p>PDF & CSV 対応</p>
+                    </div>
+                    <div class="mobile-feature">
+                        <i class="fas fa-calendar-times"></i>
+                        <h4>休暇・欠勤申請</h4>
+                        <p>スマホ → 管制自動承認</p>
+                    </div>
+                    <div class="mobile-feature">
+                        <i class="fas fa-bullhorn"></i>
+                        <h4>社内お知らせ</h4>
+                        <p>全員/グループ配信</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Calculator -->
+    <section id="roi" class="roi-calculator">
+        <div class="container">
+            <h2 class="section-title">ROI シミュレーター — 削減時間をどう再投資できるか</h2>
+            
+            <div class="calculator-inputs">
+                <h3>入力（業界中央値をプリセット）</h3>
+                <div class="input-group">
+                    <label for="headcount">在籍警備員数</label>
+                    <input type="number" id="headcount" value="50" onchange="calculateROI()">
+                </div>
+                <div class="input-group">
+                    <label for="invoice">月次請求書数</label>
+                    <input type="number" id="invoice" value="20" onchange="calculateROI()">
+                </div>
+                <div class="input-group">
+                    <label for="wage">内勤時給(円)</label>
+                    <input type="number" id="wage" value="1800" onchange="calculateROI()">
+                </div>
+            </div>
+
+            <div class="calculation-results">
+                <div class="result-card">
+                    <h4>削減時間</h4>
+                    <div id="saved-hours" class="result-value">77.4 h/月</div>
+                </div>
+                <div class="result-card">
+                    <h4>月間純メリット</h4>
+                    <div id="monthly-benefit" class="result-value">202,300 円</div>
+                </div>
+                <div class="result-card">
+                    <h4>年間効果</h4>
+                    <div id="yearly-benefit" class="result-value">2,427,600 円</div>
+                </div>
+            </div>
+
+            <div class="reinvestment-scenarios">
+                <h3>再投資シナリオ例（50 名モデル）</h3>
+                <div class="scenario-grid">
+                    <div class="scenario-card">
+                        <h4>営業深耕</h4>
+                        <p>配分: 30 h/月</p>
+                        <p>年間効果: <strong>受注 +960 万円</strong></p>
+                    </div>
+                    <div class="scenario-card">
+                        <h4>品質改善</h4>
+                        <p>配分: 20 h/月</p>
+                        <p>年間効果: <strong>クレーム ▲25％</strong></p>
+                    </div>
+                    <div class="scenario-card">
+                        <h4>隊員教育</h4>
+                        <p>配分: 27 h/月</p>
+                        <p>年間効果: <strong>離職率 ▲10％</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" onclick="calculateROI()">
+                数値を変えて自社 ROI を計算
+            </button>
+        </div>
+    </section>
+
+    <!-- Cost of Waiting -->
+    <section class="cost-waiting">
+        <div class="container">
+            <h2 class="section-title">迷う理由 VS 失うコスト</h2>
+            <div class="cost-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>迷い</th>
+                            <th>月次ロス</th>
+                            <th>5 年ロス</th>
+                            <th>根拠</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>小規模だから後回し</td>
+                            <td>72,000</td>
+                            <td>4,320,000</td>
+                            <td>内勤40h×1,800</td>
+                        </tr>
+                        <tr>
+                            <td>方法を崩すのが不安</td>
+                            <td>60,000</td>
+                            <td>3,600,000</td>
+                            <td>リーク0.4％×売上1,500万</td>
+                        </tr>
+                        <tr>
+                            <td>教育が面倒</td>
+                            <td>50,000</td>
+                            <td>3,000,000</td>
+                            <td>資格ミス1件=5万</td>
+                        </tr>
+                        <tr>
+                            <td>他社ソフト様子見</td>
+                            <td>166,700</td>
+                            <td>10,000,000</td>
+                            <td>開発200万/年</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="cost-highlight">
+                <p><strong>待つほど"利益を生む時間"が流出。ROI を 30 秒で再計算し、待つコストを確認してください。</strong></p>
+                <button class="btn btn-accent" onclick="scrollToROI()">ROI 再計算</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Cases -->
+    <section id="cases" class="success-cases">
+        <div class="container">
+            <h2 class="section-title">成功事例</h2>
+            <div class="cases-grid">
+                <div class="case-card">
+                    <h3>A社（28 名）</h3>
+                    <p>可処分時間 52h/月を営業提案へ再投資 → 受注単価 +12％・粗利 +2.5％</p>
+                </div>
+                <div class="case-card">
+                    <h3>B社（120 名）</h3>
+                    <p>レポート強化 → 得意先 2→5 拠点 → 売上 +18％（人員据置）</p>
+                </div>
+                <div class="case-card">
+                    <h3>C社（180 名）</h3>
+                    <p>帳票自動化で 22h/月 を ISO 研修へ → 審査一発通過・顧客満足 +15％</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Implementation Steps -->
+    <section class="implementation">
+        <div class="container">
+            <h2 class="section-title">導入ステップ</h2>
+            <div class="implementation-types">
+                <div class="impl-type">
+                    <h3>スモール（〜30 名）</h3>
+                    <div class="impl-timeline">
+                        <div class="timeline-step">並行稼働 1 か月</div>
+                        <div class="timeline-arrow">→</div>
+                        <div class="timeline-step">翌月フル切替</div>
+                        <div class="timeline-arrow">→</div>
+                        <div class="timeline-result">可処分時間 18h/月</div>
+                    </div>
+                </div>
+                <div class="impl-type">
+                    <h3>ラージ（150 名）</h3>
+                    <div class="impl-timeline">
+                        <div class="timeline-step">Phase1：3社・5名（2週）</div>
+                        <div class="timeline-arrow">→</div>
+                        <div class="timeline-step">Phase2：15社・30名（4週）</div>
+                        <div class="timeline-arrow">→</div>
+                        <div class="timeline-step">Phase3：全社＋1か月並行</div>
+                        <div class="timeline-arrow">→</div>
+                        <div class="timeline-result">本稼働後 可処分時間 53h/月</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <h2 class="section-title">よくある質問</h2>
+            <div class="faq-items">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>導入にはどのくらいの期間がかかりますか？</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>規模により異なりますが、30名以下の場合は1ヶ月、150名規模の場合は約3ヶ月での段階的導入が可能です。並行稼働期間を設けるため、安心して移行いただけます。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>既存のデータは移行できますか？</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>はい。ExcelやCSVデータの移行支援を行います。データの整合性を保ちながら、スムーズな移行をサポートいたします。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>サポート体制はどうなっていますか？</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>専任のサポートチームが電話・メール・リモートサポートで対応いたします。法令改正時の無償アップデートも含まれています。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>浮いた時間＝"利益を生む時間"。今すぐ数字で確認しませんか？</h2>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary btn-large" onclick="downloadResource()">
+                        <i class="fas fa-download"></i> 資料ダウンロード（無料）
+                    </button>
+                    <button class="btn btn-accent btn-large" onclick="scrollToROI()">
+                        <i class="fas fa-calculator"></i> ROI 30 秒試算
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>警備Pro</h3>
+                    <p>経営直結型警備ソフト</p>
+                </div>
+                <div class="footer-section">
+                    <h4>脚注・出典</h4>
+                    <ul>
+                        <li>国交省「令和6年度 建築保全業務労務単価」警備員：14,437 円</li>
+                        <li>NetSuite「Revenue Leakage 1〜5％」</li>
+                        <li>EY「収益リーク 1〜5％」</li>
+                        <li>2025.07 当社アンケート n=237：請求1枚40min、操作習得27min</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
