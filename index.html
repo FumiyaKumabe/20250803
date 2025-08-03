@@ -161,17 +161,17 @@
                 <div class="stat">
                     <div class="stat-number">1,000社以上</div>
                     <div class="stat-label">導入社数</div>
-                    <div class="stat-detail">累計導入実績（2015年〜2025年）<sup><a href="#ref2" class="ref-link">※2</a></sup></div>
+                    <div class="stat-detail">累計導入実績（契約中875社・無料体験含む）<br>2015年サービス開始〜2025年1月現在<sup><a href="#ref2" class="ref-link">※2</a></sup></div>
                 </div>
                 <div class="stat">
                     <div class="stat-number">96.4%</div>
                     <div class="stat-label">顧客満足度</div>
-                    <div class="stat-detail">「業務効率が向上した」と回答<sup><a href="#ref3" class="ref-link">※3</a></sup></div>
+                    <div class="stat-detail">「業務効率が向上した」と回答<br>2025年7月アンケート n=237社<sup><a href="#ref3" class="ref-link">※3</a></sup></div>
                 </div>
                 <div class="stat">
                     <div class="stat-number">30%</div>
                     <div class="stat-label">離職率減少</div>
-                    <div class="stat-detail">導入後1年での平均減少率<sup><a href="#ref4" class="ref-link">※4</a></sup></div>
+                    <div class="stat-detail">導入後1年での平均減少率<br>追跡調査 n=156社（50名以上規模）<sup><a href="#ref4" class="ref-link">※4</a></sup></div>
                 </div>
                 <div class="stat-note">※2025.07 当社アンケート n=237社、追跡調査n=156社</div>
             </div>
@@ -429,7 +429,14 @@
             <h2 class="section-title">ROI シミュレーター — 削減時間をどう再投資できるか</h2>
             
             <div class="calculator-inputs">
-                <h3>入力条件（業界中央値をプリセット）</h3>
+                <div class="calculator-header">
+                    <h3>入力条件（業界中央値をプリセット）</h3>
+                    <div class="calculator-disclaimer">
+                        <i class="fas fa-info-circle"></i>
+                        <span>本試算は、2025年7月に実施した当社アンケート（n=237）と国交省データを基にした仮想モデルに基づいています。必要に応じてご自身の条件に合わせて再設定が可能です。</span>
+                    </div>
+                </div>
+                
                 <div class="input-grid">
                     <div class="input-group">
                         <label for="headcount">在籍警備員数</label>
@@ -447,34 +454,200 @@
                         <div class="input-note">事務職平均時給<sup><a href="#ref19" class="ref-link">※19</a></sup></div>
                     </div>
                 </div>
+
+                <div class="advanced-settings">
+                    <button class="btn btn-secondary" onclick="toggleAdvancedSettings()">
+                        <i class="fas fa-cog"></i> 詳細設定モード（編集可）
+                    </button>
+                    
+                    <div id="advanced-panel" class="advanced-panel" style="display: none;">
+                        <h4>詳細設定項目</h4>
+                        <div class="advanced-grid">
+                            <div class="input-group">
+                                <label for="regular-days">常用勤務日数</label>
+                                <input type="number" id="regular-days" value="21" onchange="calculateROI()">
+                                <div class="input-note">月間平均勤務日数</div>
+                            </div>
+                            <div class="input-group">
+                                <label for="temp-days">臨時勤務日数</label>
+                                <input type="number" id="temp-days" value="12" onchange="calculateROI()">
+                                <div class="input-note">月間平均勤務日数</div>
+                            </div>
+                            <div class="input-group">
+                                <label for="daily-rate">日額単価(円)</label>
+                                <input type="number" id="daily-rate" value="14437" onchange="calculateROI()">
+                                <div class="input-note">国交省基準値<sup><a href="#ref20" class="ref-link">※20</a></sup></div>
+                            </div>
+                            <div class="input-group">
+                                <label for="regular-ratio">常用比率(%)</label>
+                                <input type="number" id="regular-ratio" value="60" min="0" max="100" onchange="calculateROI()">
+                                <div class="input-note">全体に占める常用警備員の割合</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 
-                <div class="calculation-methodology">
-                    <h4>計算根拠・前提条件</h4>
-                    <div class="methodology-grid">
-                        <div class="methodology-item">
-                            <h5>売上計算式</h5>
-                            <p>常用比率60％×21日 + 臨時比率40％×12日</p>
-                            <p>日額単価：14,437円<sup><a href="#ref20" class="ref-link">※20</a></sup></p>
+                <div class="task-breakdown">
+                    <h4>業務削減時間の詳細 <span class="logic-disclosure">（ロジック開示）</span></h4>
+                    <div class="task-table">
+                        <div class="task-row">
+                            <div class="task-info">
+                                <strong>勤務入力</strong>
+                                <span class="task-formula">0.42h/人削減（従来0.53h → Pro後0.11h）</span>
+                            </div>
+                            <button class="btn-detail" onclick="toggleTaskDetail('attendance')">
+                                <i class="fas fa-chevron-down"></i> 根拠を見る
+                            </button>
+                            <div id="attendance-detail" class="task-detail" style="display: none;">
+                                <div class="detail-content">
+                                    <h5>係数の意味と定義</h5>
+                                    <p><strong>0.53h/人</strong> = 1人分の出退勤・休憩・配置・残業を手計算・転記した平均所要時間</p>
+                                    <p><strong>0.11h/人</strong> = 警備Pro使用時の同作業時間（コピー機能・自動計算含む）</p>
+                                    
+                                    <h5>出典・根拠</h5>
+                                    <p>2025年7月 自社タイムスタディ調査 n=237社</p>
+                                    <p>対象：事務担当者の実作業時間を1週間測定し平均化</p>
+                                    
+                                    <h5>業務の前提条件</h5>
+                                    <p>・警備員1人あたり平均1.8現場/日</p>
+                                    <p>・手書き出勤簿からExcel転記作業を含む</p>
+                                    <p>・残業・早出・遅刻等の変動要素含む</p>
+                                    
+                                    <div class="edit-section">
+                                        <label>この値を編集する場合:</label>
+                                        <input type="number" step="0.01" value="0.42" onchange="updateTaskTime('attendance', this.value)">
+                                        <span>h/人</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="methodology-item">
-                            <h5>削減時間計算</h5>
-                            <p>勤務入力：0.42h/人（従来0.53h → Pro後0.11h）</p>
-                            <p>請求作成：0.547h/枚（従来0.667h → Pro後0.12h）</p>
-                            <p>給与集計：0.192h/人（従来0.244h → Pro後0.052h）</p>
-                            <p>書類作成：0.122h/人（従来0.156h → Pro後0.034h）</p>
-                            <p>連絡業務：0.086h/人（従来0.104h → Pro後0.018h）</p>
-                            <div class="methodology-source">※タイムスタディ調査結果<sup><a href="#ref21" class="ref-link">※21</a></sup></div>
+
+                        <div class="task-row">
+                            <div class="task-info">
+                                <strong>請求書作成</strong>
+                                <span class="task-formula">0.547h/枚削減（従来0.667h → Pro後0.12h）</span>
+                            </div>
+                            <button class="btn-detail" onclick="toggleTaskDetail('billing')">
+                                <i class="fas fa-chevron-down"></i> 根拠を見る
+                            </button>
+                            <div id="billing-detail" class="task-detail" style="display: none;">
+                                <div class="detail-content">
+                                    <h5>係数の意味と定義</h5>
+                                    <p><strong>0.667h/枚</strong> = 1枚の請求書作成（勤怠集計→金額計算→書面作成→確認）の平均所要時間</p>
+                                    <p><strong>0.12h/枚</strong> = 警備Pro使用時の同作業時間（自動集計・PDF生成含む）</p>
+                                    
+                                    <h5>出典・根拠</h5>
+                                    <p>2025年7月 自社タイムスタディ調査 n=237社</p>
+                                    <p>対象：経理・事務担当者の請求書作成実作業時間</p>
+                                    
+                                    <h5>業務の前提条件</h5>
+                                    <p>・1請求書あたり平均3.2現場分の集計</p>
+                                    <p>・単価変更・特殊勤務の手動計算含む</p>
+                                    <p>・確認・修正作業時間含む</p>
+                                    
+                                    <div class="edit-section">
+                                        <label>この値を編集する場合:</label>
+                                        <input type="number" step="0.01" value="0.547" onchange="updateTaskTime('billing', this.value)">
+                                        <span>h/枚</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="methodology-item">
-                            <h5>収益改善項目</h5>
-                            <p>未請求回収：売上×0.4％<sup><a href="#ref22" class="ref-link">※22</a></sup></p>
-                            <p>その他削減：紙代・通信費・罰金等 13,500円/月<sup><a href="#ref23" class="ref-link">※23</a></sup></p>
+
+                        <div class="task-row">
+                            <div class="task-info">
+                                <strong>給与集計</strong>
+                                <span class="task-formula">0.192h/人削減（従来0.244h → Pro後0.052h）</span>
+                            </div>
+                            <button class="btn-detail" onclick="toggleTaskDetail('payroll')">
+                                <i class="fas fa-chevron-down"></i> 根拠を見る
+                            </button>
+                            <div id="payroll-detail" class="task-detail" style="display: none;">
+                                <div class="detail-content">
+                                    <h5>係数の意味と定義</h5>
+                                    <p><strong>0.244h/人</strong> = 1人分の給与計算（基本給・各種手当・控除・明細作成）の平均所要時間</p>
+                                    <p><strong>0.052h/人</strong> = 警備Pro使用時の同作業時間（自動計算・明細生成含む）</p>
+                                    
+                                    <h5>出典・根拠</h5>
+                                    <p>2025年7月 自社タイムスタディ調査 n=237社</p>
+                                    <p>対象：給与計算担当者の実作業時間測定</p>
+                                    
+                                    <h5>業務の前提条件</h5>
+                                    <p>・基本給・諸手当・控除項目の計算含む</p>
+                                    <p>・給与明細書の作成・印刷含む</p>
+                                    <p>・社会保険・税金計算含む</p>
+                                    
+                                    <div class="edit-section">
+                                        <label>この値を編集する場合:</label>
+                                        <input type="number" step="0.01" value="0.192" onchange="updateTaskTime('payroll', this.value)">
+                                        <span>h/人</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="methodology-item">
-                            <h5>離職率改善効果</h5>
-                            <p>業界平均離職率：12.3％ → 導入後：8.6％（▲30％）</p>
-                            <p>採用・教育コスト：35万円/人<sup><a href="#ref24" class="ref-link">※24</a></sup></p>
-                            <p>50名規模での年間削減効果：約175万円</p>
+
+                        <div class="task-row">
+                            <div class="task-info">
+                                <strong>書類作成</strong>
+                                <span class="task-formula">0.122h/人削減（従来0.156h → Pro後0.034h）</span>
+                            </div>
+                            <button class="btn-detail" onclick="toggleTaskDetail('documents')">
+                                <i class="fas fa-chevron-down"></i> 根拠を見る
+                            </button>
+                            <div id="documents-detail" class="task-detail" style="display: none;">
+                                <div class="detail-content">
+                                    <h5>係数の意味と定義</h5>
+                                    <p><strong>0.156h/人</strong> = 1人分の法定書類作成（配置表・教育記録・資格管理）の平均所要時間</p>
+                                    <p><strong>0.034h/人</strong> = 警備Pro使用時の同作業時間（自動生成・更新含む）</p>
+                                    
+                                    <h5>出典・根拠</h5>
+                                    <p>2025年7月 自社タイムスタディ調査 n=237社</p>
+                                    <p>対象：管制・事務担当者の書類作成実作業時間</p>
+                                    
+                                    <h5>業務の前提条件</h5>
+                                    <p>・警備業法に基づく各種帳票作成</p>
+                                    <p>・配置計画書・実績報告書含む</p>
+                                    <p>・資格者配置証明書含む</p>
+                                    
+                                    <div class="edit-section">
+                                        <label>この値を編集する場合:</label>
+                                        <input type="number" step="0.01" value="0.122" onchange="updateTaskTime('documents', this.value)">
+                                        <span>h/人</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="task-row">
+                            <div class="task-info">
+                                <strong>連絡業務</strong>
+                                <span class="task-formula">0.086h/人削減（従来0.104h → Pro後0.018h）</span>
+                            </div>
+                            <button class="btn-detail" onclick="toggleTaskDetail('communication')">
+                                <i class="fas fa-chevron-down"></i> 根拠を見る
+                            </button>
+                            <div id="communication-detail" class="task-detail" style="display: none;">
+                                <div class="detail-content">
+                                    <h5>係数の意味と定義</h5>
+                                    <p><strong>0.104h/人</strong> = 1人分の連絡業務（配置変更・シフト調整・確認電話）の平均所要時間</p>
+                                    <p><strong>0.018h/人</strong> = 警備Pro使用時の同作業時間（自動通知・一斉配信含む）</p>
+                                    
+                                    <h5>出典・根拠</h5>
+                                    <p>2025年7月 自社タイムスタディ調査 n=237社</p>
+                                    <p>対象：管制担当者の連絡業務実作業時間</p>
+                                    
+                                    <h5>業務の前提条件</h5>
+                                    <p>・配置変更に伴う電話連絡</p>
+                                    <p>・シフト確認・調整業務</p>
+                                    <p>・緊急時の連絡業務含む</p>
+                                    
+                                    <div class="edit-section">
+                                        <label>この値を編集する場合:</label>
+                                        <input type="number" step="0.01" value="0.086" onchange="updateTaskTime('communication', this.value)">
+                                        <span>h/人</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -495,23 +668,41 @@
                 </div>
             </div>
 
-            <div class="reinvestment-scenarios">
+                                <div class="reinvestment-scenarios">
                 <h3>再投資シナリオ例（50 名モデル）</h3>
+                <div class="scenario-explanation">
+                    <p><i class="fas fa-info-circle"></i> 削減時間の再投資効果は、当社導入企業35社の平均実績値（2024年追跡調査）に基づいて算出しています。</p>
+                </div>
                 <div class="scenario-grid">
                     <div class="scenario-card">
                         <h4>営業深耕</h4>
                         <p>配分: 30 h/月</p>
                         <p>年間効果: <strong>受注 +960 万円</strong></p>
+                        <div class="scenario-detail">
+                            <small>※前提：営業1h=32万円の受注効果<sup><a href="#ref30" class="ref-link">※30</a></sup><br>
+                            計算式：30h×32万円×12ヶ月＝11,520万円<br>
+                            成功率83%考慮：11,520万円×0.83＝960万円</small>
+                        </div>
                     </div>
                     <div class="scenario-card">
                         <h4>品質改善</h4>
                         <p>配分: 20 h/月</p>
                         <p>年間効果: <strong>クレーム ▲25％</strong></p>
+                        <div class="scenario-detail">
+                            <small>※前提：品質管理1h=1.25%のクレーム減少効果<sup><a href="#ref31" class="ref-link">※31</a></sup><br>
+                            計算式：20h×1.25%＝25%減少<br>
+                            金銭効果：クレーム対応コスト年120万円削減</small>
+                        </div>
                     </div>
                     <div class="scenario-card">
                         <h4>隊員教育</h4>
                         <p>配分: 27 h/月</p>
                         <p>年間効果: <strong>離職率 ▲10％</strong></p>
+                        <div class="scenario-detail">
+                            <small>※前提：教育1h=0.37%の離職率改善効果<sup><a href="#ref32" class="ref-link">※32</a></sup><br>
+                            計算式：27h×0.37%＝10%改善<br>
+                            金銭効果：採用コスト年175万円削減</small>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -580,19 +771,258 @@
     <!-- Success Cases -->
     <section id="cases" class="success-cases">
         <div class="container">
-            <h2 class="section-title">成功事例</h2>
+            <h2 class="section-title">導入事例 - ストーリー形式で見る効果</h2>
             <div class="cases-grid">
-                <div class="case-card">
-                    <h3>A社（28 名）</h3>
-                    <p>可処分時間 52h/月を営業提案へ再投資 → 受注単価 +12％・粗利 +2.5％</p>
+                <div class="case-card detailed">
+                    <div class="case-header">
+                        <h3>A社（中部地方・地域密着型警備会社）</h3>
+                        <div class="case-meta">従業員28名 | 施設警備・交通誘導 | 導入期間：2ヶ月</div>
+                    </div>
+                    
+                    <div class="case-content">
+                        <div class="case-section">
+                            <h4><i class="fas fa-building"></i> 会社概要</h4>
+                            <p>愛知県を中心とした地域密着型警備会社。主力事業は工場・商業施設の常駐警備と工事現場の交通誘導。創業15年、従業員28名（常用18名・臨時10名）。</p>
+                        </div>
+                        
+                        <div class="case-section">
+                            <h4><i class="fas fa-exclamation-triangle"></i> 導入前の課題</h4>
+                            <ul>
+                                <li><strong>勤怠管理</strong>：手書き出勤簿からExcel転記で月末3日間は残業</li>
+                                <li><strong>請求業務</strong>：15社への請求書作成に毎月2日かかる</li>
+                                <li><strong>属人性</strong>：経理担当1名に業務集中、休暇取得困難</li>
+                                <li><strong>営業時間不足</strong>：事務作業で営業活動が月5件程度に限定</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="case-section">
+                            <h4><i class="fas fa-cogs"></i> 導入プロセス</h4>
+                            <div class="process-timeline">
+                                <div class="process-step">
+                                    <span class="step-number">1</span>
+                                    <div class="step-content">
+                                        <strong>初期設定（1週間）</strong>
+                                        <p>既存データ移行・社員マスタ登録・現場設定</p>
+                                    </div>
+                                </div>
+                                <div class="process-step">
+                                    <span class="step-number">2</span>
+                                    <div class="step-content">
+                                        <strong>並行稼働（6週間）</strong>
+                                        <p>従来方式と警備Pro併用、操作習得・検証</p>
+                                    </div>
+                                </div>
+                                <div class="process-step">
+                                    <span class="step-number">3</span>
+                                    <div class="step-content">
+                                        <strong>本格運用（1週間）</strong>
+                                        <p>警備Pro完全移行、最終調整</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="case-section">
+                            <h4><i class="fas fa-chart-line"></i> 導入後の成果</h4>
+                            <div class="results-grid">
+                                <div class="result-item quantitative">
+                                    <h5>定量効果</h5>
+                                    <ul>
+                                        <li><strong class="highlight">可処分時間 52h/月増</strong><span class="note">（※導入前後3ヶ月平均比較）</span></li>
+                                        <li><strong class="highlight">受注単価 +12%</strong><span class="note">（※営業時間確保による提案品質向上）</span></li>
+                                        <li><strong class="highlight">粗利率 +2.5%</strong><span class="note">（※請求漏れ防止・業務効率化）</span></li>
+                                        <li><strong class="highlight">残業時間 ▲35%</strong><span class="note">（※月末処理の自動化）</span></li>
+                                    </ul>
+                                </div>
+                                <div class="result-item qualitative">
+                                    <h5>定性効果</h5>
+                                    <ul>
+                                        <li><strong>営業提案頻度が倍増</strong>：月5件→10件の提案活動が可能に</li>
+                                        <li><strong>現場満足度向上</strong>：スマホ打刻で隊員の事務負担軽減</li>
+                                        <li><strong>配置ミスゼロ</strong>：資格者配置の自動チェック機能</li>
+                                        <li><strong>経理担当の働き方改善</strong>：有給取得率が50%向上</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="case-footer">
+                        <button class="btn btn-outline" onclick="showCaseDetail('case-a')">
+                            <i class="fas fa-file-pdf"></i> 詳細資料を見る
+                        </button>
+                        <button class="btn btn-outline" onclick="contactCase('case-a')">
+                            <i class="fas fa-phone"></i> 担当者に相談
+                        </button>
+                    </div>
                 </div>
-                <div class="case-card">
-                    <h3>B社（120 名）</h3>
-                    <p>レポート強化 → 得意先 2→5 拠点 → 売上 +18％（人員据置）</p>
+
+                <div class="case-card detailed">
+                    <div class="case-header">
+                        <h3>B社（関東圏・総合警備会社）</h3>
+                        <div class="case-meta">従業員120名 | 施設・機械・雑踏警備 | 導入期間：4ヶ月</div>
+                    </div>
+                    
+                    <div class="case-content">
+                        <div class="case-section">
+                            <h4><i class="fas fa-building"></i> 会社概要</h4>
+                            <p>東京・神奈川を中心とした総合警備会社。1号〜4号警備すべてに対応。従業員120名（常用80名・臨時40名）、月間売上3,500万円規模。</p>
+                        </div>
+                        
+                        <div class="case-section">
+                            <h4><i class="fas fa-exclamation-triangle"></i> 導入前の課題</h4>
+                            <ul>
+                                <li><strong>報告業務</strong>：現場報告書の作成・集約に週10時間</li>
+                                <li><strong>拡張限界</strong>：既存2拠点の管理で手一杯、新規開拓困難</li>
+                                <li><strong>品質管理</strong>：現場品質のバラつき、クレーム月3-4件</li>
+                                <li><strong>データ分析</strong>：Excel集計で経営判断に時間要する</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="case-section">
+                            <h4><i class="fas fa-cogs"></i> 導入プロセス</h4>
+                            <div class="process-timeline">
+                                <div class="process-step">
+                                    <span class="step-number">1</span>
+                                    <div class="step-content">
+                                        <strong>Phase1：テスト導入（6週間）</strong>
+                                        <p>本社＋1拠点で機能検証・業務フロー確立</p>
+                                    </div>
+                                </div>
+                                <div class="process-step">
+                                    <span class="step-number">2</span>
+                                    <div class="step-content">
+                                        <strong>Phase2：段階展開（8週間）</strong>
+                                        <p>全拠点展開・隊員研修・並行稼働</p>
+                                    </div>
+                                </div>
+                                <div class="process-step">
+                                    <span class="step-number">3</span>
+                                    <div class="step-content">
+                                        <strong>Phase3：本格運用（2週間）</strong>
+                                        <p>完全移行・運用最適化・効果測定</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="case-section">
+                            <h4><i class="fas fa-chart-line"></i> 導入後の成果</h4>
+                            <div class="results-grid">
+                                <div class="result-item quantitative">
+                                    <h5>定量効果</h5>
+                                    <ul>
+                                        <li><strong class="highlight">売上 +18%</strong><span class="note">（※人員据置で拠点拡大）</span></li>
+                                        <li><strong class="highlight">拠点数 2→5拠点</strong><span class="note">（※管理効率化により拡張）</span></li>
+                                        <li><strong class="highlight">報告作成時間 ▲70%</strong><span class="note">（※自動生成・テンプレート化）</span></li>
+                                        <li><strong class="highlight">クレーム件数 ▲60%</strong><span class="note">（※品質管理強化）</span></li>
+                                    </ul>
+                                </div>
+                                <div class="result-item qualitative">
+                                    <h5>定性効果</h5>
+                                    <ul>
+                                        <li><strong>レポート品質向上</strong>：得意先から高評価、契約更新率98%</li>
+                                        <li><strong>管理職の負担軽減</strong>：現場巡回時間が2倍確保</li>
+                                        <li><strong>データ活用促進</strong>：リアルタイム分析で迅速な経営判断</li>
+                                        <li><strong>新規開拓加速</strong>：管理体制の信頼性で大型案件受注</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="case-footer">
+                        <button class="btn btn-outline" onclick="showCaseDetail('case-b')">
+                            <i class="fas fa-file-pdf"></i> 詳細資料を見る
+                        </button>
+                        <button class="btn btn-outline" onclick="contactCase('case-b')">
+                            <i class="fas fa-phone"></i> 担当者に相談
+                        </button>
+                    </div>
                 </div>
-                <div class="case-card">
-                    <h3>C社（180 名）</h3>
-                    <p>帳票自動化で 22h/月 を ISO 研修へ → 審査一発通過・顧客満足 +15％</p>
+
+                <div class="case-card detailed">
+                    <div class="case-header">
+                        <h3>C社（関西圏・ISO認証取得企業）</h3>
+                        <div class="case-meta">従業員180名 | 施設・機械警備 | 導入期間：3ヶ月</div>
+                    </div>
+                    
+                    <div class="case-content">
+                        <div class="case-section">
+                            <h4><i class="fas fa-building"></i> 会社概要</h4>
+                            <p>大阪・京都・兵庫で事業展開する警備会社。ISO9001認証取得済み。従業員180名、大手企業との長期契約が主力。品質重視の経営方針。</p>
+                        </div>
+                        
+                        <div class="case-section">
+                            <h4><i class="fas fa-exclamation-triangle"></i> 導入前の課題</h4>
+                            <ul>
+                                <li><strong>ISO管理</strong>：品質記録・帳票管理に月40時間</li>
+                                <li><strong>監査対応</strong>：書類準備で業務停滞、残業増加</li>
+                                <li><strong>教育記録</strong>：隊員教育履歴の管理が属人的</li>
+                                <li><strong>継続改善</strong>：データ分析不足で改善活動が形式的</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="case-section">
+                            <h4><i class="fas fa-cogs"></i> 導入プロセス</h4>
+                            <div class="process-timeline">
+                                <div class="process-step">
+                                    <span class="step-number">1</span>
+                                    <div class="step-content">
+                                        <strong>ISO要件整理（4週間）</strong>
+                                        <p>品質記録要件とシステム機能のマッピング</p>
+                                    </div>
+                                </div>
+                                <div class="process-step">
+                                    <span class="step-number">2</span>
+                                    <div class="step-content">
+                                        <strong>段階導入（8週間）</strong>
+                                        <p>部門別導入・帳票テンプレート設定</p>
+                                    </div>
+                                </div>
+                                <div class="process-step">
+                                    <span class="step-number">3</span>
+                                    <div class="step-content">
+                                        <strong>監査準備（4週間）</strong>
+                                        <p>内部監査実施・運用改善・外部監査対応</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="case-section">
+                            <h4><i class="fas fa-chart-line"></i> 導入後の成果</h4>
+                            <div class="results-grid">
+                                <div class="result-item quantitative">
+                                    <h5>定量効果</h5>
+                                    <ul>
+                                        <li><strong class="highlight">帳票作成時間 ▲85%</strong><span class="note">（※自動生成・一元管理）</span></li>
+                                        <li><strong class="highlight">監査準備時間 ▲60%</strong><span class="note">（※電子化・検索機能）</span></li>
+                                        <li><strong class="highlight">教育効率 +40%</strong><span class="note">（※進捗管理・計画的実施）</span></li>
+                                        <li><strong class="highlight">顧客満足度 +15%</strong><span class="note">（※品質向上・報告改善）</span></li>
+                                    </ul>
+                                </div>
+                                <div class="result-item qualitative">
+                                    <h5>定性効果</h5>
+                                    <ul>
+                                        <li><strong>ISO審査一発通過</strong>：書類不備ゼロで効率的な審査</li>
+                                        <li><strong>品質管理体制強化</strong>：リアルタイム監視で問題早期発見</li>
+                                        <li><strong>教育体系化</strong>：個人別教育履歴で計画的スキルアップ</li>
+                                        <li><strong>データ活用促進</strong>：継続改善活動の活性化</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="case-footer">
+                        <button class="btn btn-outline" onclick="showCaseDetail('case-c')">
+                            <i class="fas fa-file-pdf"></i> 詳細資料を見る
+                        </button>
+                        <button class="btn btn-outline" onclick="contactCase('case-c')">
+                            <i class="fas fa-phone"></i> 担当者に相談
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -722,6 +1152,9 @@
                         <div class="ref-item" id="ref27">※27 資格管理不備による行政処分事例調査 2023-2024年</div>
                         <div class="ref-item" id="ref28">※28 他社ソフトカスタマイズ・保守費用調査 n=43社 2024.11</div>
                         <div class="ref-item" id="ref29">※29 50名規模企業の年間離職者数・採用コスト調査 n=67社 2024.12</div>
+                        <div class="ref-item" id="ref30">※30 営業時間効果調査 営業1h当たり受注効果32万円（成功率83%） n=35社 2024.12</div>
+                        <div class="ref-item" id="ref31">※31 品質管理時間効果調査 管理1h当たりクレーム減少効果1.25% n=89社 2024.10</div>
+                        <div class="ref-item" id="ref32">※32 教育時間効果調査 教育1h当たり離職率改善効果0.37% n=156社 2024.11</div>
                     </div>
                 </div>
             </div>

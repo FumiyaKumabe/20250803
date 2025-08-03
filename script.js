@@ -1,16 +1,32 @@
+// タスク時間の設定値（編集可能）
+let taskTimes = {
+    attendance: 0.42,
+    billing: 0.547,
+    payroll: 0.192,
+    documents: 0.122,
+    communication: 0.086
+};
+
 // ROI Calculator Functions
 function calculateROI() {
     const headcount = parseInt(document.getElementById('headcount').value) || 50;
     const invoice = parseInt(document.getElementById('invoice').value) || 20;
     const wage = parseInt(document.getElementById('wage').value) || 1800;
     
-    // 内勤タスク別計算式
+    // 詳細設定値の取得
+    const regularDays = parseInt(document.getElementById('regular-days')?.value) || 21;
+    const tempDays = parseInt(document.getElementById('temp-days')?.value) || 12;
+    const dailyRate = parseInt(document.getElementById('daily-rate')?.value) || 14437;
+    const regularRatio = (parseInt(document.getElementById('regular-ratio')?.value) || 60) / 100;
+    const temporaryRatio = 1 - regularRatio;
+    
+    // 内勤タスク別計算式（編集可能な値を使用）
     const taskReductions = {
-        attendance: 0.42 * headcount,      // 勤務入力
-        billing: 0.547 * invoice,          // 請求作成
-        payroll: 0.192 * headcount,        // 給与集計
-        documents: 0.122 * headcount,      // 書類作成
-        communication: 0.086 * headcount   // 連絡業務
+        attendance: taskTimes.attendance * headcount,      // 勤務入力
+        billing: taskTimes.billing * invoice,              // 請求作成
+        payroll: taskTimes.payroll * headcount,            // 給与集計
+        documents: taskTimes.documents * headcount,        // 書類作成
+        communication: taskTimes.communication * headcount // 連絡業務
     };
     
     // 削減時間計算
@@ -19,14 +35,8 @@ function calculateROI() {
     // 削減額計算
     const savedAmount = totalSavedHours * wage;
     
-    // 売上計算
-    const regularRatio = 0.6;
-    const temporaryRatio = 0.4;
-    const regularDays = 21;
-    const temporaryDays = 12;
-    const dailyRate = 14437;
-    
-    const totalSales = dailyRate * ((headcount * regularRatio * regularDays) + (headcount * temporaryRatio * temporaryDays));
+    // 売上計算（詳細設定値を使用）
+    const totalSales = dailyRate * ((headcount * regularRatio * regularDays) + (headcount * temporaryRatio * tempDays));
     
     // 未請求回収
     const uncollectedRecovery = totalSales * 0.004;
@@ -60,9 +70,70 @@ function calculateROI() {
     console.log(`離職率改善: ${Math.round(annualTurnoverSavings / 12).toLocaleString()}円/月`);
     console.log(`月間合計: ${Math.round(monthlyBenefit).toLocaleString()}円`);
     console.log(`年間合計: ${Math.round(yearlyBenefit).toLocaleString()}円`);
+    console.log(`売上: ${Math.round(totalSales).toLocaleString()}円`);
+    console.log(`設定値 - 常用比率: ${Math.round(regularRatio*100)}%, 常用日数: ${regularDays}, 臨時日数: ${tempDays}, 日額: ${dailyRate}円`);
     
     // 再投資シナリオの更新
     updateReinvestmentScenarios(totalSavedHours);
+}
+
+// 詳細設定パネルの表示/非表示
+function toggleAdvancedSettings() {
+    const panel = document.getElementById('advanced-panel');
+    const button = event.target.closest('button');
+    
+    if (panel.style.display === 'none' || panel.style.display === '') {
+        panel.style.display = 'block';
+        button.innerHTML = '<i class="fas fa-cog"></i> 詳細設定を閉じる';
+    } else {
+        panel.style.display = 'none';
+        button.innerHTML = '<i class="fas fa-cog"></i> 詳細設定モード（編集可）';
+    }
+}
+
+// タスク詳細の表示/非表示
+function toggleTaskDetail(taskId) {
+    const detail = document.getElementById(`${taskId}-detail`);
+    const button = event.target.closest('button');
+    const icon = button.querySelector('i');
+    
+    if (detail.classList.contains('active')) {
+        detail.classList.remove('active');
+        button.classList.remove('active');
+        icon.style.transform = 'rotate(0deg)';
+        button.innerHTML = '<i class="fas fa-chevron-down"></i> 根拠を見る';
+    } else {
+        // 他の詳細を閉じる
+        document.querySelectorAll('.task-detail').forEach(d => d.classList.remove('active'));
+        document.querySelectorAll('.btn-detail').forEach(b => {
+            b.classList.remove('active');
+            b.querySelector('i').style.transform = 'rotate(0deg)';
+            b.innerHTML = '<i class="fas fa-chevron-down"></i> 根拠を見る';
+        });
+        
+        // 選択された詳細を開く
+        detail.classList.add('active');
+        button.classList.add('active');
+        icon.style.transform = 'rotate(180deg)';
+        button.innerHTML = '<i class="fas fa-chevron-up"></i> 閉じる';
+    }
+}
+
+// タスク時間の更新
+function updateTaskTime(taskId, value) {
+    const numValue = parseFloat(value);
+    if (!isNaN(numValue) && numValue >= 0) {
+        taskTimes[taskId] = numValue;
+        calculateROI(); // 再計算
+        
+        // 表示の更新
+        const taskInfo = document.querySelector(`#${taskId}-detail`).closest('.task-row').querySelector('.task-formula');
+        const beforeValue = (taskTimes[taskId] + (taskId === 'attendance' ? 0.11 : taskId === 'billing' ? 0.12 : taskId === 'payroll' ? 0.052 : taskId === 'documents' ? 0.034 : 0.018)).toFixed(3);
+        const afterValue = (taskId === 'attendance' ? 0.11 : taskId === 'billing' ? 0.12 : taskId === 'payroll' ? 0.052 : taskId === 'documents' ? 0.034 : 0.018).toFixed(3);
+        const unit = taskId === 'billing' ? '/枚' : '/人';
+        
+        taskInfo.textContent = `${numValue.toFixed(3)}h${unit}削減（従来${beforeValue}h → Pro後${afterValue}h）`;
+    }
 }
 
 function updateReinvestmentScenarios(savedHours) {
@@ -171,6 +242,35 @@ function showDemo() {
     // showVideoModal();
     // または
     // window.open('/demo', '_blank');
+}
+
+// Case Study Functions
+function showCaseDetail(caseId) {
+    // デモ用のアラート - 実際の実装では詳細PDFを表示
+    const caseNames = {
+        'case-a': 'A社（中部地方・地域密着型警備会社）',
+        'case-b': 'B社（関東圏・総合警備会社）',
+        'case-c': 'C社（関西圏・ISO認証取得企業）'
+    };
+    
+    alert(`${caseNames[caseId]}の詳細資料を表示します。\n（デモ版のため、実際のPDFは表示されません）`);
+    
+    // 実際の実装例:
+    // window.open(`/case-studies/${caseId}-detail.pdf`, '_blank');
+}
+
+function contactCase(caseId) {
+    // デモ用のアラート - 実際の実装では担当者連絡フォームを表示
+    const caseNames = {
+        'case-a': 'A社（中部地方・地域密着型警備会社）',
+        'case-b': 'B社（関東圏・総合警備会社）',
+        'case-c': 'C社（関西圏・ISO認証取得企業）'
+    };
+    
+    alert(`${caseNames[caseId]}の担当者に相談します。\n（デモ版のため、実際の連絡フォームは表示されません）`);
+    
+    // 実際の実装例:
+    // showContactForm(caseId);
 }
 
 // Form Validation (資料ダウンロード用)
