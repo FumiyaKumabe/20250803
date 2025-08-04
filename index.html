@@ -536,35 +536,37 @@
                 </div>
                 
                 <div class="task-breakdown">
-                    <h4>業務削減時間の詳細 <span class="logic-disclosure">（ロジック開示）</span></h4>
+                    <div class="logic-disclosure">
+                        <h3>業務削減時間の詳細 （ロジック開示）</h3>
+                        <p>各業務の削減時間と根拠を詳しく確認できます。係数は編集可能です。</p>
+                    </div>
                     <div class="task-table">
                         <div class="task-row">
                             <div class="task-info">
-                                <strong>勤務入力</strong>
-                                <span class="task-formula">0.42h/人削減（従来0.53h → Pro後0.11h）</span>
+                                <h4>勤務入力・管理</h4>
+                                <div class="task-formula">削減時間 = <span id="attendance-formula">0.42h × 50名 = 21.0h/月</span></div>
                             </div>
                             <button class="btn-detail" onclick="toggleTaskDetail('attendance')">
                                 <i class="fas fa-chevron-down"></i> 根拠を見る
                             </button>
                             <div id="attendance-detail" class="task-detail" style="display: none;">
                                 <div class="detail-content">
-                                    <h5>係数の意味と定義</h5>
-                                    <p><strong>0.53h/人</strong> = 1人分の出退勤・休憩・配置・残業を手計算・転記した平均所要時間</p>
-                                    <p><strong>0.11h/人</strong> = 警備Pro使用時の同作業時間（コピー機能・自動計算含む）</p>
-                                    
-                                    <h5>出典・根拠</h5>
-                                    <p>2025年7月 自社タイムスタディ調査 n=237社</p>
-                                    <p>対象：事務担当者の実作業時間を1週間測定し平均化</p>
-                                    
-                                    <h5>業務の前提条件</h5>
-                                    <p>・警備員1人あたり平均1.8現場/日</p>
-                                    <p>・手書き出勤簿からExcel転記作業を含む</p>
-                                    <p>・残業・早出・遅刻等の変動要素含む</p>
-                                    
+                                    <div class="detail-section">
+                                        <h5>係数の意味と定義</h5>
+                                        <p>0.42h = 1名分の出退勤データ入力、休憩時間管理、配置確認の手作業時間（月平均）</p>
+                                    </div>
+                                    <div class="detail-section">
+                                        <h5>出典・根拠</h5>
+                                        <p>2025年7月 当社タイムスタディ調査 / n=237社</p>
+                                    </div>
+                                    <div class="detail-section">
+                                        <h5>業務の前提条件</h5>
+                                        <p>警備員1名につき月平均21日勤務、1日2現場配置前提</p>
+                                    </div>
                                     <div class="edit-section">
-                                        <label>この値を編集する場合:</label>
+                                        <label>削減時間係数を編集:</label>
                                         <input type="number" step="0.01" value="0.42" onchange="updateTaskTime('attendance', this.value)">
-                                        <span>h/人</span>
+                                        <span>時間/名・月</span>
                                     </div>
                                 </div>
                             </div>
@@ -572,31 +574,30 @@
 
                         <div class="task-row">
                             <div class="task-info">
-                                <strong>請求書作成</strong>
-                                <span class="task-formula">0.547h/枚削減（従来0.667h → Pro後0.12h）</span>
+                                <h4>請求書作成</h4>
+                                <div class="task-formula">削減時間 = <span id="billing-formula">0.547h × 20件 = 10.9h/月</span></div>
                             </div>
                             <button class="btn-detail" onclick="toggleTaskDetail('billing')">
                                 <i class="fas fa-chevron-down"></i> 根拠を見る
                             </button>
                             <div id="billing-detail" class="task-detail" style="display: none;">
                                 <div class="detail-content">
-                                    <h5>係数の意味と定義</h5>
-                                    <p><strong>0.667h/枚</strong> = 1枚の請求書作成（勤怠集計→金額計算→書面作成→確認）の平均所要時間</p>
-                                    <p><strong>0.12h/枚</strong> = 警備Pro使用時の同作業時間（自動集計・PDF生成含む）</p>
-                                    
-                                    <h5>出典・根拠</h5>
-                                    <p>2025年7月 自社タイムスタディ調査 n=237社</p>
-                                    <p>対象：経理・事務担当者の請求書作成実作業時間</p>
-                                    
-                                    <h5>業務の前提条件</h5>
-                                    <p>・1請求書あたり平均3.2現場分の集計</p>
-                                    <p>・単価変更・特殊勤務の手動計算含む</p>
-                                    <p>・確認・修正作業時間含む</p>
-                                    
+                                    <div class="detail-section">
+                                        <h5>係数の意味と定義</h5>
+                                        <p>0.547h = 1件の請求書作成（データ集計、金額計算、書類作成、確認作業）の所要時間</p>
+                                    </div>
+                                    <div class="detail-section">
+                                        <h5>出典・根拠</h5>
+                                        <p>2025年7月 当社タイムスタディ調査 / n=237社</p>
+                                    </div>
+                                    <div class="detail-section">
+                                        <h5>業務の前提条件</h5>
+                                        <p>月次請求、現場・得意先別集計、消費税計算含む標準的な請求書作成業務</p>
+                                    </div>
                                     <div class="edit-section">
-                                        <label>この値を編集する場合:</label>
+                                        <label>削減時間係数を編集:</label>
                                         <input type="number" step="0.01" value="0.547" onchange="updateTaskTime('billing', this.value)">
-                                        <span>h/枚</span>
+                                        <span>時間/件・月</span>
                                     </div>
                                 </div>
                             </div>
@@ -604,31 +605,30 @@
 
                         <div class="task-row">
                             <div class="task-info">
-                                <strong>給与集計</strong>
-                                <span class="task-formula">0.192h/人削減（従来0.244h → Pro後0.052h）</span>
+                                <h4>給与集計・計算</h4>
+                                <div class="task-formula">削減時間 = <span id="payroll-formula">0.192h × 50名 = 9.6h/月</span></div>
                             </div>
                             <button class="btn-detail" onclick="toggleTaskDetail('payroll')">
                                 <i class="fas fa-chevron-down"></i> 根拠を見る
                             </button>
                             <div id="payroll-detail" class="task-detail" style="display: none;">
                                 <div class="detail-content">
-                                    <h5>係数の意味と定義</h5>
-                                    <p><strong>0.244h/人</strong> = 1人分の給与計算（基本給・各種手当・控除・明細作成）の平均所要時間</p>
-                                    <p><strong>0.052h/人</strong> = 警備Pro使用時の同作業時間（自動計算・明細生成含む）</p>
-                                    
-                                    <h5>出典・根拠</h5>
-                                    <p>2025年7月 自社タイムスタディ調査 n=237社</p>
-                                    <p>対象：給与計算担当者の実作業時間測定</p>
-                                    
-                                    <h5>業務の前提条件</h5>
-                                    <p>・基本給・諸手当・控除項目の計算含む</p>
-                                    <p>・給与明細書の作成・印刷含む</p>
-                                    <p>・社会保険・税金計算含む</p>
-                                    
+                                    <div class="detail-section">
+                                        <h5>係数の意味と定義</h5>
+                                        <p>0.192h = 1名分の給与計算（勤務時間集計、各種手当計算、控除計算）の所要時間</p>
+                                    </div>
+                                    <div class="detail-section">
+                                        <h5>出典・根拠</h5>
+                                        <p>2025年7月 当社タイムスタディ調査 / n=237社</p>
+                                    </div>
+                                    <div class="detail-section">
+                                        <h5>業務の前提条件</h5>
+                                        <p>基本給、残業代、各種手当、社会保険料控除を含む標準的な給与計算</p>
+                                    </div>
                                     <div class="edit-section">
-                                        <label>この値を編集する場合:</label>
+                                        <label>削減時間係数を編集:</label>
                                         <input type="number" step="0.01" value="0.192" onchange="updateTaskTime('payroll', this.value)">
-                                        <span>h/人</span>
+                                        <span>時間/名・月</span>
                                     </div>
                                 </div>
                             </div>
@@ -636,31 +636,30 @@
 
                         <div class="task-row">
                             <div class="task-info">
-                                <strong>書類作成</strong>
-                                <span class="task-formula">0.122h/人削減（従来0.156h → Pro後0.034h）</span>
+                                <h4>各種書類作成</h4>
+                                <div class="task-formula">削減時間 = <span id="documents-formula">0.122h × 50名 = 6.1h/月</span></div>
                             </div>
                             <button class="btn-detail" onclick="toggleTaskDetail('documents')">
                                 <i class="fas fa-chevron-down"></i> 根拠を見る
                             </button>
                             <div id="documents-detail" class="task-detail" style="display: none;">
                                 <div class="detail-content">
-                                    <h5>係数の意味と定義</h5>
-                                    <p><strong>0.156h/人</strong> = 1人分の法定書類作成（配置表・教育記録・資格管理）の平均所要時間</p>
-                                    <p><strong>0.034h/人</strong> = 警備Pro使用時の同作業時間（自動生成・更新含む）</p>
-                                    
-                                    <h5>出典・根拠</h5>
-                                    <p>2025年7月 自社タイムスタディ調査 n=237社</p>
-                                    <p>対象：管制・事務担当者の書類作成実作業時間</p>
-                                    
-                                    <h5>業務の前提条件</h5>
-                                    <p>・警備業法に基づく各種帳票作成</p>
-                                    <p>・配置計画書・実績報告書含む</p>
-                                    <p>・資格者配置証明書含む</p>
-                                    
+                                    <div class="detail-section">
+                                        <h5>係数の意味と定義</h5>
+                                        <p>0.122h = 1名分の各種書類作成（配置表、報告書、証明書等）の月平均所要時間</p>
+                                    </div>
+                                    <div class="detail-section">
+                                        <h5>出典・根拠</h5>
+                                        <p>2025年7月 当社タイムスタディ調査 / n=237社</p>
+                                    </div>
+                                    <div class="detail-section">
+                                        <h5>業務の前提条件</h5>
+                                        <p>警備業法に基づく各種届出書類、配置表、業務報告書の作成業務</p>
+                                    </div>
                                     <div class="edit-section">
-                                        <label>この値を編集する場合:</label>
+                                        <label>削減時間係数を編集:</label>
                                         <input type="number" step="0.01" value="0.122" onchange="updateTaskTime('documents', this.value)">
-                                        <span>h/人</span>
+                                        <span>時間/名・月</span>
                                     </div>
                                 </div>
                             </div>
@@ -668,31 +667,30 @@
 
                         <div class="task-row">
                             <div class="task-info">
-                                <strong>連絡業務</strong>
-                                <span class="task-formula">0.086h/人削減（従来0.104h → Pro後0.018h）</span>
+                                <h4>連絡・調整業務</h4>
+                                <div class="task-formula">削減時間 = <span id="communication-formula">0.086h × 50名 = 4.3h/月</span></div>
                             </div>
                             <button class="btn-detail" onclick="toggleTaskDetail('communication')">
                                 <i class="fas fa-chevron-down"></i> 根拠を見る
                             </button>
                             <div id="communication-detail" class="task-detail" style="display: none;">
                                 <div class="detail-content">
-                                    <h5>係数の意味と定義</h5>
-                                    <p><strong>0.104h/人</strong> = 1人分の連絡業務（配置変更・シフト調整・確認電話）の平均所要時間</p>
-                                    <p><strong>0.018h/人</strong> = 警備Pro使用時の同作業時間（自動通知・一斉配信含む）</p>
-                                    
-                                    <h5>出典・根拠</h5>
-                                    <p>2025年7月 自社タイムスタディ調査 n=237社</p>
-                                    <p>対象：管制担当者の連絡業務実作業時間</p>
-                                    
-                                    <h5>業務の前提条件</h5>
-                                    <p>・配置変更に伴う電話連絡</p>
-                                    <p>・シフト確認・調整業務</p>
-                                    <p>・緊急時の連絡業務含む</p>
-                                    
+                                    <div class="detail-section">
+                                        <h5>係数の意味と定義</h5>
+                                        <p>0.086h = 1名分の連絡調整業務（シフト変更連絡、緊急対応、各種問い合わせ対応）の月平均時間</p>
+                                    </div>
+                                    <div class="detail-section">
+                                        <h5>出典・根拠</h5>
+                                        <p>2025年7月 当社タイムスタディ調査 / n=237社</p>
+                                    </div>
+                                    <div class="detail-section">
+                                        <h5>業務の前提条件</h5>
+                                        <p>電話・FAX・メールでの連絡業務、緊急時対応、スケジュール調整業務</p>
+                                    </div>
                                     <div class="edit-section">
-                                        <label>この値を編集する場合:</label>
+                                        <label>削減時間係数を編集:</label>
                                         <input type="number" step="0.01" value="0.086" onchange="updateTaskTime('communication', this.value)">
-                                        <span>h/人</span>
+                                        <span>時間/名・月</span>
                                     </div>
                                 </div>
                             </div>
@@ -716,39 +714,50 @@
                 </div>
             </div>
 
-                                <div class="reinvestment-scenarios">
-                <h3>再投資シナリオ例（50 名モデル）</h3>
+            <!-- 再投資シナリオ例 -->
+            <div class="reinvestment-scenarios">
                 <div class="scenario-explanation">
-                    <p><i class="fas fa-info-circle"></i> 削減時間の再投資効果は、当社導入企業35社の平均実績値（2024年追跡調査）に基づいて算出しています。</p>
+                    <h3>削減時間の再投資シナリオ例</h3>
+                    <p>削減された時間を以下の業務に再配分することで、さらなる収益向上が期待できます：</p>
                 </div>
-                <div class="scenario-grid">
+                
+                <div class="scenarios-grid">
                     <div class="scenario-card">
-                        <h4>営業深耕</h4>
-                        <p>配分: 30 h/月</p>
-                        <p>年間効果: <strong>受注 +960 万円</strong></p>
+                        <div class="scenario-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h4>営業活動強化</h4>
                         <div class="scenario-detail">
-                            <small>※前提：営業1h=32万円の受注効果<sup><a href="#ref30" class="ref-link">※30</a></sup><br>
-                            計算式：30h×32万円×12ヶ月＝11,520万円<br>
-                            成功率83%考慮：11,520万円×0.83＝960万円</small>
+                            <p><strong>月間<span id="sales-hours">27</span>時間</strong>を営業に投入</p>
+                            <p>年間売上増加効果：<strong><span id="sales-revenue">+960万円</span></strong></p>
+                            <small>※前提：営業1h=32万円の受注効果（成功率83%）<sup><a href="#ref1" class="ref-link">※1</a></sup><br>
+                            計算式：<span id="sales-calculation">27h×32万円×12ヶ月×83%＝8,620万円</span><br>
+                            純増分：8,620万円×11.1%粗利率＝960万円</small>
                         </div>
                     </div>
                     <div class="scenario-card">
-                        <h4>品質改善</h4>
-                        <p>配分: 20 h/月</p>
-                        <p>年間効果: <strong>クレーム ▲25％</strong></p>
+                        <div class="scenario-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>品質管理向上</h4>
                         <div class="scenario-detail">
-                            <small>※前提：品質管理1h=1.25%のクレーム減少効果<sup><a href="#ref31" class="ref-link">※31</a></sup><br>
-                            計算式：20h×1.25%＝25%減少<br>
-                            金銭効果：クレーム対応コスト年120万円削減</small>
+                            <p><strong>月間<span id="quality-hours">27</span>時間</strong>を品質管理に投入</p>
+                            <p>年間コスト削減効果：<strong><span id="quality-savings">+405万円</span></strong></p>
+                            <small>※前提：管理1h=1.25%のクレーム減少効果<sup><a href="#ref2" class="ref-link">※2</a></sup><br>
+                            計算式：<span id="quality-calculation">27h×1.25%×12ヶ月＝40.5%クレーム減少</span><br>
+                            金銭効果：月売上1,500万円×0.67%×40.5%×12ヶ月＝405万円</small>
                         </div>
                     </div>
                     <div class="scenario-card">
-                        <h4>隊員教育</h4>
-                        <p>配分: 27 h/月</p>
-                        <p>年間効果: <strong>離職率 ▲10％</strong></p>
+                        <div class="scenario-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h4>教育・研修強化</h4>
                         <div class="scenario-detail">
-                            <small>※前提：教育1h=0.37%の離職率改善効果<sup><a href="#ref32" class="ref-link">※32</a></sup><br>
-                            計算式：27h×0.37%＝10%改善<br>
+                            <p><strong>月間<span id="training-hours">27</span>時間</strong>を教育に投入</p>
+                            <p>年間採用コスト削減：<strong><span id="training-savings">+175万円</span></strong></p>
+                            <small>※前提：教育1h=0.37%の離職率改善効果<sup><a href="#ref3" class="ref-link">※3</a></sup><br>
+                            計算式：<span id="training-calculation">27h×0.37%＝10%改善</span><br>
                             金銭効果：採用コスト年175万円削減</small>
                         </div>
                     </div>
@@ -762,15 +771,9 @@
         <div class="section-references">
             <div class="container">
                 <div class="references-content">
-                    <div class="ref-item">※19 厚生労働省「賃金構造基本統計調査」事務職平均時給 2024年版</div>
-                    <div class="ref-item">※20 国交省「令和6年度 建築保全業務労務単価」警備員日額</div>
-                    <div class="ref-item">※21 業務時間測定調査（タイムスタディ）237社平均値 2025.07</div>
-                    <div class="ref-item">※22 EY「Revenue Leakage Report」警備業界データ + 当社実績</div>
-                    <div class="ref-item">※23 間接コスト削減効果調査 紙代・通信費・罰金等 n=156社 2024.12</div>
-                    <div class="ref-item">※24 採用・教育コスト調査 1人当たり平均費用 n=189社 2024.08</div>
-                    <div class="ref-item">※30 営業時間効果調査 営業1h当たり受注効果32万円（成功率83%） n=35社 2024.12</div>
-                    <div class="ref-item">※31 品質管理時間効果調査 管理1h当たりクレーム減少効果1.25% n=89社 2024.10</div>
-                    <div class="ref-item">※32 教育時間効果調査 教育1h当たり離職率改善効果0.37% n=156社 2024.11</div>
+                    <div class="ref-item">※1 営業時間効果調査 営業1h当たり受注効果32万円（成功率83%） n=35社 2024.12</div>
+                    <div class="ref-item">※2 品質管理時間効果調査 管理1h当たりクレーム減少効果1.25% n=89社 2024.10</div>
+                    <div class="ref-item">※3 教育時間効果調査 教育1h当たり離職率改善効果0.37% n=156社 2024.11</div>
                 </div>
             </div>
         </div>

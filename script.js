@@ -73,8 +73,24 @@ function calculateROI() {
     console.log(`売上: ${Math.round(totalSales).toLocaleString()}円`);
     console.log(`設定値 - 常用比率: ${Math.round(regularRatio*100)}%, 常用日数: ${regularDays}, 臨時日数: ${tempDays}, 日額: ${dailyRate}円`);
     
+    // タスク詳細の計算式更新
+    const headcountValue = parseInt(document.getElementById('headcount').value);
+    const invoiceValue = parseInt(document.getElementById('invoice').value);
+    
+    const attendanceFormulaEl = document.getElementById('attendance-formula');
+    const billingFormulaEl = document.getElementById('billing-formula');
+    const payrollFormulaEl = document.getElementById('payroll-formula');
+    const documentsFormulaEl = document.getElementById('documents-formula');
+    const communicationFormulaEl = document.getElementById('communication-formula');
+    
+    if (attendanceFormulaEl) attendanceFormulaEl.textContent = `${taskTimes.attendance}h × ${headcountValue}名 = ${(taskTimes.attendance * headcountValue).toFixed(1)}h/月`;
+    if (billingFormulaEl) billingFormulaEl.textContent = `${taskTimes.billing}h × ${invoiceValue}件 = ${(taskTimes.billing * invoiceValue).toFixed(1)}h/月`;
+    if (payrollFormulaEl) payrollFormulaEl.textContent = `${taskTimes.payroll}h × ${headcountValue}名 = ${(taskTimes.payroll * headcountValue).toFixed(1)}h/月`;
+    if (documentsFormulaEl) documentsFormulaEl.textContent = `${taskTimes.documents}h × ${headcountValue}名 = ${(taskTimes.documents * headcountValue).toFixed(1)}h/月`;
+    if (communicationFormulaEl) communicationFormulaEl.textContent = `${taskTimes.communication}h × ${headcountValue}名 = ${(taskTimes.communication * headcountValue).toFixed(1)}h/月`;
+    
     // 再投資シナリオの更新
-    updateReinvestmentScenarios(totalSavedHours);
+    updateReinvestmentScenarios();
 }
 
 // 詳細設定パネルの表示/非表示
@@ -124,52 +140,54 @@ function updateTaskTime(taskId, value) {
     const numValue = parseFloat(value);
     if (!isNaN(numValue) && numValue >= 0) {
         taskTimes[taskId] = numValue;
-        calculateROI(); // 再計算
-        
-        // 表示の更新
-        const taskInfo = document.querySelector(`#${taskId}-detail`).closest('.task-row').querySelector('.task-formula');
-        const beforeValue = (taskTimes[taskId] + (taskId === 'attendance' ? 0.11 : taskId === 'billing' ? 0.12 : taskId === 'payroll' ? 0.052 : taskId === 'documents' ? 0.034 : 0.018)).toFixed(3);
-        const afterValue = (taskId === 'attendance' ? 0.11 : taskId === 'billing' ? 0.12 : taskId === 'payroll' ? 0.052 : taskId === 'documents' ? 0.034 : 0.018).toFixed(3);
-        const unit = taskId === 'billing' ? '/枚' : '/人';
-        
-        taskInfo.textContent = `${numValue.toFixed(3)}h${unit}削減（従来${beforeValue}h → Pro後${afterValue}h）`;
+        calculateROI(); // 再計算（計算式も自動更新される）
     }
 }
 
-function updateReinvestmentScenarios(savedHours) {
-    const scenarios = document.querySelectorAll('.scenario-card');
+function updateReinvestmentScenarios() {
+    const monthlyHours = parseFloat(document.getElementById('saved-hours').textContent);
     
-    // 営業深耕の効果計算
-    const salesHours = Math.min(30, savedHours * 0.4);
-    const salesEffect = Math.round(salesHours * 32 * 12); // 月32万円効果と仮定
+    // 各シナリオに削減時間を均等配分
+    const scenarioHours = Math.round(monthlyHours / 3);
     
-    // 品質改善の効果
-    const qualityHours = Math.min(20, savedHours * 0.26);
-    const qualityEffect = Math.round(25 - (qualityHours / 20) * 25);
+    // 営業効果計算 (32万円/h × 成功率83%)
+    const salesRevenue = Math.round(scenarioHours * 320000 * 12 * 0.83 / 10000);
+    const salesCalculation = `${scenarioHours}h×32万円×12ヶ月×83%＝${Math.round(scenarioHours * 320000 * 12 * 0.83 / 10000)}万円`;
     
-    // 教育の効果
-    const trainingHours = Math.min(27, savedHours * 0.34);
-    const trainingEffect = Math.round(10 - (trainingHours / 27) * 10);
+    // 品質管理効果計算 (1.25%/h × 月売上1,500万円)
+    const qualityEffect = scenarioHours * 1.25 * 12;
+    const qualitySavings = Math.round(15000000 * 0.0067 * qualityEffect / 100 / 10000);
+    const qualityCalculation = `${scenarioHours}h×1.25%×12ヶ月＝${qualityEffect}%クレーム減少`;
     
-    if (scenarios.length >= 3) {
-        scenarios[0].innerHTML = `
-            <h4>営業深耕</h4>
-            <p>配分: ${salesHours.toFixed(0)} h/月</p>
-            <p>年間効果: <strong>受注 +${salesEffect} 万円</strong></p>
-        `;
-        
-        scenarios[1].innerHTML = `
-            <h4>品質改善</h4>
-            <p>配分: ${qualityHours.toFixed(0)} h/月</p>
-            <p>年間効果: <strong>クレーム ▲${qualityEffect}％</strong></p>
-        `;
-        
-        scenarios[2].innerHTML = `
-            <h4>隊員教育</h4>
-            <p>配分: ${trainingHours.toFixed(0)} h/月</p>
-            <p>年間効果: <strong>離職率 ▲${trainingEffect}％</strong></p>
-        `;
-    }
+    // 教育効果計算 (0.37%/h × 採用コスト175万円)
+    const trainingEffect = Math.round(scenarioHours * 0.37 * 100) / 100;
+    const trainingSavings = 175;
+    const trainingCalculation = `${scenarioHours}h×0.37%＝${trainingEffect}%改善`;
+    
+    // DOM更新
+    const salesHoursEl = document.getElementById('sales-hours');
+    const salesRevenueEl = document.getElementById('sales-revenue');
+    const salesCalculationEl = document.getElementById('sales-calculation');
+    
+    const qualityHoursEl = document.getElementById('quality-hours');
+    const qualitySavingsEl = document.getElementById('quality-savings');
+    const qualityCalculationEl = document.getElementById('quality-calculation');
+    
+    const trainingHoursEl = document.getElementById('training-hours');
+    const trainingSavingsEl = document.getElementById('training-savings');
+    const trainingCalculationEl = document.getElementById('training-calculation');
+    
+    if (salesHoursEl) salesHoursEl.textContent = scenarioHours;
+    if (salesRevenueEl) salesRevenueEl.textContent = salesRevenue;
+    if (salesCalculationEl) salesCalculationEl.textContent = salesCalculation;
+    
+    if (qualityHoursEl) qualityHoursEl.textContent = scenarioHours;
+    if (qualitySavingsEl) qualitySavingsEl.textContent = qualitySavings;
+    if (qualityCalculationEl) qualityCalculationEl.textContent = qualityCalculation;
+    
+    if (trainingHoursEl) trainingHoursEl.textContent = scenarioHours;
+    if (trainingSavingsEl) trainingSavingsEl.textContent = trainingSavings;
+    if (trainingCalculationEl) trainingCalculationEl.textContent = trainingCalculation;
 }
 
 // FAQ Toggle Function
