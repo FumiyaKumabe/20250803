@@ -202,9 +202,12 @@ function toggleFAQ(element) {
 
 // Smooth Scroll Functions
 function scrollToROI() {
-    document.getElementById('roi').scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
+    const target = document.getElementById('roi');
+    const headerHeight = document.querySelector('.header').offsetHeight;
+    const targetPosition = target.offsetTop - headerHeight - 20;
+    window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
     });
 }
 
@@ -426,9 +429,11 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+                const headerHeight = document.querySelector('.header').offsetHeight;
+                const targetPosition = target.offsetTop - headerHeight - 20;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
                 });
             }
         });
